@@ -1,0 +1,789 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap");
+
+/* =========================================
+   VIKASH - PERSONAL EDITION ANALOG CLOCK
+========================================= */
+
+:root {
+  --background: #071329;
+  --background-glow: #1b3558;
+  --dial: #0b1d38;
+  --dial-light: #1b3558;
+  --metal: #bd7655;
+  --metal-light: #f0b58d;
+  --numeral: #f2e4bd;
+  --second: #f04444;
+  --text: #e8edf5;
+  --muted: #9eb4cf;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      ellipse at 50% 25%,
+      var(--background-glow),
+      var(--background) 65%,
+      #020711
+    );
+}
+
+/* MAIN SHOWROOM */
+
+.showroom {
+  width: min(100%, 1050px);
+  min-height: 100vh;
+  margin: auto;
+  padding: 30px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  background:
+    radial-gradient(
+      ellipse at 50% 25%,
+      var(--background-glow),
+      var(--background) 65%,
+      #020711
+    );
+  transition: background 0.4s ease;
+}
+
+/* HEADER */
+
+.page-header {
+  text-align: center;
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 5px;
+  margin-bottom: 15px;
+}
+
+.page-header h1 {
+  color: var(--numeral);
+  font-family: 'Cinzel', serif;
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 700;
+  letter-spacing: 9px;
+}
+
+.subtitle {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 5px;
+}
+
+/* CLOCK OUTER FRAME */
+
+.clock-stage {
+  width: min(82vw, 570px);
+  aspect-ratio: 1;
+}
+
+.clock {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 20px 25px #000a);
+}
+
+.bezel {
+  width: 100%;
+  height: 100%;
+  padding: 13px;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      from 210deg,
+      var(--metal),
+      var(--metal-light),
+      var(--metal),
+      #f5c29b,
+      var(--metal),
+      var(--metal-light),
+      var(--metal)
+    );
+  box-shadow:
+    inset 0 2px 4px #ffffff99,
+    inset 0 -5px 8px #3b1d18,
+    0 0 0 2px #422b24,
+    0 8px 15px #0009;
+}
+
+/* CLOCK DIAL */
+
+.dial {
+  position: relative;
+  container-type: inline-size;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 35% 25%,
+      var(--dial-light),
+      var(--dial) 72%
+    );
+  border: 2px solid var(--metal);
+  box-shadow:
+    inset 0 0 0 3px #182b43,
+    inset 0 0 0 5px var(--metal-light),
+    inset 0 0 35px #0008;
+}
+
+.dial-pattern {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* DIAL PATTERNS */
+
+.pattern-sunburst .dial-pattern {
+  background:
+    repeating-conic-gradient(
+      #ffffff09 0deg 1deg,
+      transparent 1deg 5deg
+    );
+}
+
+.pattern-clean .dial-pattern {
+  background: none;
+}
+
+.pattern-concentric .dial-pattern {
+  background:
+    repeating-radial-gradient(
+      circle,
+      transparent 0 12px,
+      #ffffff12 13px 14px
+    );
+}
+
+.pattern-guilloche .dial-pattern {
+  background:
+    repeating-radial-gradient(
+      ellipse,
+      transparent 0 8px,
+      #ffffff10 9px 10px
+    );
+}
+
+.pattern-crosshair .dial-pattern {
+  background:
+    linear-gradient(
+      90deg,
+      transparent 49.8%,
+      #ffffff18 50%,
+      transparent 50.2%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 49.8%,
+      #ffffff18 50%,
+      transparent 50.2%
+    );
+}
+
+.pattern-geometric .dial-pattern {
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      #ffffff0a 0deg 15deg,
+      transparent 15deg 30deg
+    );
+}
+
+.pattern-star .dial-pattern {
+  background:
+    repeating-conic-gradient(
+      #ffffff0a 0deg 1deg,
+      transparent 1deg 30deg
+    );
+}
+
+/* MINUTE MARKERS */
+
+.minute-markers,
+.hour-markers {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.minute-marker {
+  position: absolute;
+  width: 2px;
+  height: 7px;
+  background: var(--numeral);
+  opacity: 0.8;
+}
+
+.minute-marker.major {
+  width: 3px;
+  height: 13px;
+  opacity: 1;
+}
+
+/* HOUR NUMERALS */
+
+.hour-marker {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  color: var(--numeral);
+  font-family: 'Cinzel', serif;
+  font-size: clamp(19px, 4.3vw, 35px);
+  font-weight: 500;
+  text-shadow: 0 2px 5px #0009;
+  transform: translate(-50%, -50%);
+}
+
+.hour-marker.bold {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+}
+
+.hour-marker.minimal::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--numeral);
+  box-shadow: 0 0 8px var(--numeral);
+}
+
+/* VIKASH BRANDING */
+
+.branding {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 3;
+}
+
+.brand-name {
+  color: var(--numeral);
+  font-family: 'Cinzel', serif;
+  font-size: clamp(14px, 3vw, 20px);
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-shadow: 0 2px 5px #0008;
+}
+
+/* DATE INSIDE CLOCK */
+
+.date-window {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--numeral);
+  font-family: 'Cinzel', serif;
+  font-size: clamp(12px, 2vw, 17px);
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-shadow: 0 2px 5px #000;
+}
+
+/* CLOCK HANDS */
+
+.hands {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  transform-origin: 50% 100%;
+  border-radius: 50% 50% 3px 3px;
+}
+
+/* HOUR HAND */
+
+.hour-hand {
+  width: 10px;
+  height: 24%;
+  background:
+    linear-gradient(
+      90deg,
+      #75432f,
+      #f0b58d 45%,
+      #bd7655
+    );
+  box-shadow: 0 2px 5px #0009;
+}
+
+/* MINUTE HAND */
+
+.minute-hand {
+  width: 6px;
+  height: 34%;
+  background:
+    linear-gradient(
+      90deg,
+      #75432f,
+      #ffe0bd 45%,
+      #bd7655
+    );
+  box-shadow: 0 2px 5px #0009;
+}
+
+/* SECOND HAND */
+
+.second-hand {
+  width: 2px;
+  height: 40%;
+  border-radius: 3px;
+  background: var(--second);
+  box-shadow: 0 0 7px #f0444488;
+}
+
+.second-hand::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 23px;
+  left: 50%;
+  bottom: -19px;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  background: var(--second);
+}
+
+/* CENTER CAP */
+
+.center-cap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 23px;
+  height: 23px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid #6f3d2c;
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      #ffd2a8,
+      #c77d55 50%,
+      #693b2b
+    );
+  box-shadow: 0 2px 5px #000b;
+}
+
+/* HAND DESIGN OPTIONS */
+
+/* SLIM */
+
+.hands-slim .hour-hand {
+  width: 5px;
+}
+
+.hands-slim .minute-hand {
+  width: 3px;
+}
+
+/* SWORD */
+
+.hands-sword .hour-hand {
+  width: 13px;
+  clip-path:
+    polygon(
+      50% 0,
+      100% 17%,
+      68% 100%,
+      32% 100%,
+      0 17%
+    );
+}
+
+.hands-sword .minute-hand {
+  width: 9px;
+  clip-path:
+    polygon(
+      50% 0,
+      100% 13%,
+      65% 100%,
+      35% 100%,
+      0 13%
+    );
+}
+
+/* LEAF */
+
+.hands-leaf .hour-hand,
+.hands-leaf .minute-hand {
+  border-radius: 100% 0 100% 0;
+}
+
+/* LUMINOUS */
+
+.hands-luminous .hour-hand,
+.hands-luminous .minute-hand {
+  box-shadow:
+    0 0 8px #fff8,
+    0 0 14px #d6e7ff66;
+}
+
+/* DIAMOND */
+
+.hands-diamond .hour-hand,
+.hands-diamond .minute-hand {
+  clip-path:
+    polygon(
+      50% 0,
+      100% 18%,
+      58% 100%,
+      42% 100%,
+      0 18%
+    );
+}
+
+/* NEEDLE */
+
+.hands-needle .hour-hand {
+  width: 3px;
+}
+
+.hands-needle .minute-hand {
+  width: 2px;
+}
+
+/* ROYAL */
+
+.hands-royal .hour-hand {
+  width: 12px;
+  clip-path:
+    polygon(
+      50% 0,
+      100% 20%,
+      65% 85%,
+      50% 100%,
+      35% 85%,
+      0 20%
+    );
+}
+
+.hands-royal .minute-hand {
+  width: 7px;
+  clip-path:
+    polygon(
+      50% 0,
+      100% 15%,
+      60% 100%,
+      40% 100%,
+      0 15%
+    );
+}
+
+/* GLASS EFFECT */
+
+.glass-effect {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      125deg,
+      #ffffff12,
+      transparent 35%,
+      transparent 75%,
+      #ffffff08
+    );
+}
+
+/* DIGITAL CLOCK */
+
+.digital-display {
+  text-align: center;
+  padding: 18px 35px;
+  border: 1px solid #60758e66;
+  border-radius: 15px;
+  background: #08172c88;
+  min-width: 260px;
+  box-shadow: 0 8px 25px #0003;
+}
+
+.digital-label {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 4px;
+  margin-bottom: 9px;
+}
+
+#digital-time {
+  color: var(--numeral);
+  font-size: clamp(20px, 4vw, 30px);
+  font-weight: 600;
+  letter-spacing: 3px;
+  font-variant-numeric: tabular-nums;
+}
+
+#digital-date {
+  color: var(--muted);
+  margin-top: 8px;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+/* CUSTOMIZATION PANEL */
+
+.customization {
+  width: min(100%, 800px);
+}
+
+.customization h2 {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 3px;
+  margin-bottom: 22px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.control {
+  display: grid;
+  gap: 9px;
+}
+
+.control span,
+.custom-colors label {
+  color: #a6b8ce;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* SELECT BOXES AND BUTTONS */
+
+.showroom select,
+.showroom button {
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1px solid #526987;
+  border-radius: 9px;
+  color: #e8edf5;
+  background:
+    linear-gradient(
+      #172d4a,
+      #0b1b31
+    );
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition:
+    border-color 0.25s,
+    background 0.25s,
+    transform 0.25s;
+}
+
+.showroom select:hover,
+.showroom button:hover {
+  border-color: var(--metal-light);
+}
+
+.showroom button:active {
+  transform: scale(0.97);
+}
+
+.showroom select:focus-visible,
+.showroom button:focus-visible {
+  outline: 2px solid var(--metal-light);
+  outline-offset: 3px;
+}
+
+/* CUSTOM COLOR PICKERS */
+
+.custom-colors {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.custom-colors label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.custom-colors input[type="color"] {
+  width: 40px;
+  height: 35px;
+  padding: 2px;
+  border: 1px solid #526987;
+  border-radius: 7px;
+  background: #0b1b31;
+  cursor: pointer;
+}
+
+/* WATCH COLOR THEMES */
+
+.showroom.theme-emerald {
+  --dial: #062d27;
+  --dial-light: #17634f;
+  --numeral: #e8dfbd;
+  --metal: #b99a63;
+  --metal-light: #e8d29c;
+}
+
+.showroom.theme-black {
+  --dial: #090b10;
+  --dial-light: #30343c;
+  --numeral: #f0e7d1;
+  --metal: #8a929d;
+  --metal-light: #d7dce3;
+}
+
+.showroom.theme-burgundy {
+  --dial: #390e20;
+  --dial-light: #792b46;
+  --numeral: #f5dfc2;
+  --metal: #b76d55;
+  --metal-light: #e6a17c;
+}
+
+.showroom.theme-ivory {
+  --dial: #e7dcc1;
+  --dial-light: #fff4d9;
+  --numeral: #473a2d;
+  --metal: #a7794e;
+  --metal-light: #d5ad7d;
+}
+
+.showroom.theme-silver {
+  --dial: #263b54;
+  --dial-light: #607d9c;
+  --numeral: #f1f4f7;
+  --metal: #8296ac;
+  --metal-light: #d5e0ed;
+}
+
+/* BACKGROUND THEMES */
+
+.showroom.bg-black {
+  --background: #020305;
+  --background-glow: #171b22;
+}
+
+.showroom.bg-charcoal {
+  --background: #151719;
+  --background-glow: #383d43;
+}
+
+.showroom.bg-slate {
+  --background: #17283b;
+  --background-glow: #354f6a;
+}
+
+.showroom.bg-cream {
+  --background: #d8cbb4;
+  --background-glow: #f4e8d4;
+}
+
+.showroom.bg-wine {
+  --background: #230c18;
+  --background-glow: #522035;
+}
+
+/* FOOTER */
+
+.page-footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 2px;
+  padding: 15px 10px 20px;
+}
+
+.page-footer .heart {
+  color: #f04444;
+  font-size: 17px;
+  display: inline-block;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 650px) {
+  .showroom {
+    padding: 24px 14px;
+    gap: 22px;
+  }
+
+  .clock-stage {
+    width: min(91vw, 470px);
+  }
+
+  .bezel {
+    padding: 10px;
+  }
+
+  .control-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+  }
+
+  .page-footer {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 380px) {
+  .control-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hour-marker {
+    width: 34px;
+    height: 34px;
+  }
+
+  .custom-colors {
+    gap: 12px;
+  }
+
+  .digital-display {
+    min-width: 230px;
+    padding: 15px 20px;
+  }
+}
