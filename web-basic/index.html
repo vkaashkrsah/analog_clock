@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#071329">
+
+    <title>VIKASH | Personal Edition Analog Clock</title>
+
+    <meta name="description" content="VIKASH Personal Edition - A premium interactive analog clock with customizable watch designs.">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <main class="showroom">
+
+        <!-- HEADER -->
+        <header class="page-header">
+            <p class="eyebrow">TIMELESS DESIGN · PERSONAL EDITION</p>
+            <h1>VIKASH</h1>
+            <p class="subtitle">A PERSONAL TIMEPIECE</p>
+        </header>
+
+
+        <!-- ANALOG CLOCK -->
+        <section class="clock-stage" aria-label="Live analog clock">
+
+            <div class="clock">
+
+                <!-- METALLIC BEZEL -->
+                <div class="bezel">
+
+                    <!-- WATCH DIAL -->
+                    <div class="dial" id="dial">
+
+                        <div class="dial-pattern"></div>
+
+                        <!-- MINUTE MARKERS -->
+                        <div class="minute-markers" id="minute-markers"></div>
+
+                        <!-- HOUR NUMERALS -->
+                        <div class="hour-markers" id="hour-markers"></div>
+
+                        <!-- BRAND -->
+                        <div class="branding">
+                            <div class="brand-name">VIKASH</div>
+                        </div>
+
+                        <!-- DATE INSIDE CLOCK -->
+                        <div class="date-window">
+                            <span id="weekday">SUN</span>
+                            <span id="date-display">NOV 1</span>
+                        </div>
+
+                        <!-- CLOCK HANDS -->
+                        <div class="hands" id="hands">
+
+                            <div class="hand hour-hand" id="hour-hand"></div>
+
+                            <div class="hand minute-hand" id="minute-hand"></div>
+
+                            <div class="hand second-hand" id="second-hand"></div>
+
+                            <div class="center-cap"></div>
+
+                        </div>
+
+                        <!-- GLASS EFFECT -->
+                        <div class="glass-effect"></div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- DIGITAL CLOCK -->
+        <section class="digital-display">
+
+            <p class="digital-label">CURRENT TIME</p>
+
+            <div id="digital-time">10:20:10 PM</div>
+
+            <div id="digital-date">01/11/2026</div>
+
+        </section>
+
+
+        <!-- CUSTOMIZATION -->
+        <section class="customization">
+
+            <h2>PERSONALIZE YOUR TIMEPIECE</h2>
+
+            <div class="control-grid">
+
+                <!-- NUMERAL STYLE -->
+                <label class="control">
+                    <span>Numeral Style</span>
+
+                    <select id="numeral-style">
+                        <option value="arabic">Arabic · 1 2 3</option>
+                        <option value="roman">Roman · I II III</option>
+                        <option value="bold">Bold Numbers</option>
+                        <option value="minimal">Minimal Markers</option>
+                    </select>
+                </label>
+
+
+                <!-- HAND STYLE -->
+                <label class="control">
+                    <span>Hand Design</span>
+
+                    <select id="hand-style">
+                        <option value="classic">Classic</option>
+                        <option value="slim">Slim</option>
+                        <option value="sword">Sword</option>
+                        <option value="leaf">Leaf</option>
+                        <option value="luminous">Luminous</option>
+                        <option value="diamond">Diamond</option>
+                        <option value="needle">Needle</option>
+                        <option value="royal">Royal</option>
+                    </select>
+                </label>
+
+
+                <!-- DIAL DESIGN -->
+                <label class="control">
+                    <span>Dial Design</span>
+
+                    <select id="dial-design">
+                        <option value="sunburst">Sunburst</option>
+                        <option value="clean">Minimal</option>
+                        <option value="concentric">Concentric</option>
+                        <option value="guilloche">Guilloche</option>
+                        <option value="crosshair">Crosshair</option>
+                        <option value="geometric">Geometric</option>
+                        <option value="star">Star Pattern</option>
+                    </select>
+                </label>
+
+
+                <!-- WATCH COLOR -->
+                <label class="control">
+                    <span>Watch Color</span>
+
+                    <select id="watch-color">
+                        <option value="midnight">Midnight Blue</option>
+                        <option value="emerald">Emerald Green</option>
+                        <option value="black">Classic Black</option>
+                        <option value="burgundy">Burgundy</option>
+                        <option value="ivory">Ivory</option>
+                        <option value="silver">Silver Blue</option>
+                    </select>
+                </label>
+
+
+                <!-- BACKGROUND -->
+                <label class="control">
+                    <span>Background</span>
+
+                    <select id="background-color">
+                        <option value="navy">Deep Navy</option>
+                        <option value="black">Black</option>
+                        <option value="charcoal">Charcoal</option>
+                        <option value="slate">Slate Blue</option>
+                        <option value="cream">Cream</option>
+                        <option value="wine">Wine</option>
+                    </select>
+                </label>
+
+            </div>
+
+
+            <!-- CUSTOM COLOR PICKERS -->
+            <div class="custom-colors">
+
+                <label>
+                    Custom Dial Color
+                    <input
+                        type="color"
+                        id="custom-dial"
+                        value="#0b1d38"
+                    >
+                </label>
+
+                <label>
+                    Custom Background
+                    <input
+                        type="color"
+                        id="custom-background"
+                        value="#071329"
+                    >
+                </label>
+
+                <button type="button" id="reset-button">
+                    Reset Design
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="page-footer">
+            Made By <span class="heart">♥</span> with VIKASH
+        </footer>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+</html>
